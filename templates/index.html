@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>📒 Quản lý chi tiêu</h2>
+
+<form method="post">
+    <input type="date" name="date" class="input" required>
+    <input type="text" name="category" class="input" placeholder="Danh mục (VD: Ăn uống, Mua sắm)" required>
+    <input type="number" name="amount" class="input" placeholder="Số tiền (VND)" required>
+    <textarea name="note" class="input" placeholder="Ghi chú (tùy chọn)"></textarea>
+    <button type="submit" class="btn">+ Thêm khoản chi</button>
+</form>
+
+<table>
+    <tr>
+        <th>Ngày</th>
+        <th>Danh mục</th>
+        <th>Số tiền (VND)</th>
+        <th>Ghi chú</th>
+    </tr>
+    {% for item in expenses %}
+    <tr>
+        <td>{{ item.date }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ "{:,.0f}".format(item.amount) }}</td>
+        <td>{{ item.note }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<canvas id="myChart" style="margin-top:20px;"></canvas>
+
+<script>
+const ctx = document.getElementById('myChart');
+const data = {
+    labels: {{ category_totals.keys() | list | safe }},
+    datasets: [{
+        label: 'Tổng chi tiêu (VND)',
+        data: {{ category_totals.values() | list | safe }},
+        backgroundColor: '#2ab7a9'
+    }]
+};
+new Chart(ctx, { type: 'bar', data: data });
+</script>
+{% endblock %}
