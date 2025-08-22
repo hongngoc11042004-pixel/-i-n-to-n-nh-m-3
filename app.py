@@ -79,5 +79,6 @@ def index():
         expenses=user_expenses,
         category_totals=category_totals
     )
-
+if __name__ == "__main__":
+    app.run()
     
