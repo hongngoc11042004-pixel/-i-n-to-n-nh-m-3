@@ -81,6 +81,8 @@ def index():
         category_totals=category_totals
     )
 
+# 🔥 Phần chạy app: Render sẽ gọi Gunicorn qua Procfile,
+# nhưng nếu chạy cục bộ thì vẫn dùng Flask
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Render cấp PORT động
     app.run(host="0.0.0.0", port=port, debug=False)
