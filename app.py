@@ -80,6 +80,4 @@ def index():
         category_totals=category_totals
     )
 
-if __name__ == "__main__":
-    app.run(debug=True)
     
